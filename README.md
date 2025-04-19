@@ -1,20 +1,89 @@
-# HR Employee Data Analysis 📊
 
-A data analysis project focused on understanding employee dissatisfaction using HR data. This project explores patterns and trends that may influence employee turnover and overall satisfaction.
+# HR Data Dissatisfaction Analysis
 
-## 📁 Project Overview
+We have a problem with HR data which is that employees are not satisfied. So, we go through the data trying to know where the dissatisfaction comes from.
 
-- Dataset: HR Employee Attrition Data
-- Goal: Identify key factors that lead to employee dissatisfaction and attrition.
-- Tools: Python, Pandas, Matplotlib, Seaborn, Jupyter Notebook
+---
 
-## 📌 Key Findings
+## Task 1: Exploratory Data Analysis & Problem Framing
 
-- Employees with low satisfaction scores are more likely to leave.
-- Certain job roles show significantly higher attrition rates.
-- Work-life balance and salary hikes also contribute to dissatisfaction.
+We aim to analyze employee data to identify patterns related to dissatisfaction, particularly focusing on **monthly income** and its relationship with **job level**, **working years**, and **attrition**.
 
-## 💡 Conclusion
+---
 
-This analysis highlights areas where HR policies and management strategies could be improved to retain talent.
+## Task 2: Importing Libraries & Exploring the Dataset
 
+```python
+import numpy as np
+import pandas as pd 
+from matplotlib import pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import LabelEncoder
+
+hrData = pd.read_csv("HR-Employee-Attrition.csv")
+hrData.head(10)
+hrData.info()
+hrData.describe()
+```
+
+---
+
+## Task 3: Check for Missing Values
+
+```python
+plt.figure(figsize=(12, 6))
+sns.heatmap(hrData.isnull(), cbar=False, cmap="Reds")
+plt.title("Missing Values Heatmap")
+plt.show()
+```
+> **No missing values found**
+
+---
+
+## Task 4: Visual Analysis
+
+- Pairplot for numerical features
+- Countplots for categorical features
+- Histograms of key variables
+
+```python
+sns.pairplot(data=hrData)
+```
+
+> **Observation**: Monthly Income seems to have an unusual distribution, indicating possible issues.
+
+---
+
+## Task 5: Investigating Monthly Income Issues
+
+- Scatter plots of Monthly Income vs TotalWorkingYears, Age
+- Income vs Age with JobLevel
+- Correlation heatmap
+
+```python
+sns.jointplot(x=hrData["MonthlyIncome"], y=hrData["TotalWorkingYears"], kind="scatter", hue=hrData['Department'])
+```
+
+> **Insight**: Employees with 20+ years experience earn similar to those with 1-5 years. Monthly income is **not aligned** with experience or age.
+
+---
+
+## Task 6: Proposed Solutions
+
+```python
+sns.barplot(x=hrData["MonthlyIncome"], y=hrData["JobRole"])
+```
+
+> **Roles affected**: HR, Research Scientist, Laboratory Technician, Sales Representative
+
+```python
+corr = hrData.corr(numeric_only=True)
+plt.figure(figsize=(40, 30))
+sns.heatmap(corr, annot=True, cmap='coolwarm')
+```
+
+---
+
+## Conclusion
+
+There’s a **clear mismatch** between job level, experience, and monthly income, leading to dissatisfaction. Re-evaluating **salary structure** based on **experience** and **role** is essential.
