@@ -8,17 +8,6 @@ A data analysis project focused on understanding employee dissatisfaction using 
 - Goal: Identify key factors that lead to employee dissatisfaction and attrition.
 - Tools: Python, Pandas, Matplotlib, Seaborn, Jupyter Notebook
 
-## 📊 Key Visualizations
-
-### 1. Employee Satisfaction vs Attrition
-![Satisfaction vs Attrition](images/satisfaction_vs_attrition.png)
-
-### 2. Heatmap of Correlations
-![Correlation Heatmap](images/correlation_heatmap.png)
-
-### 3. Job Role vs Attrition Rate
-![Job Role Attrition](images/job_role_attrition.png)
-
 ## 📌 Key Findings
 
 - Employees with low satisfaction scores are more likely to leave.
